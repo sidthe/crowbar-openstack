@@ -10,10 +10,6 @@ executor_thread_pool_size = 256
 transport_url = <%= @rabbit_settings[:url] %>
 control_exchange = magnum
 
-[api]
-port = <%= @bind_port %>
-host = <%= @bind_host %>
-
 [barbican_client]
 region_name = <%= @keystone_settings['endpoint_region'] %>
 
