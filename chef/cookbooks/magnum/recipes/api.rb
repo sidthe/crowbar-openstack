@@ -140,3 +140,10 @@ end
 apache_site "magnum-api.conf" do
   enable true
 end
+
+service "magnum-api" do
+  service_name node[:magnum][:api][:service_name]
+  supports status: true, restart: true, start: true, stop: true
+  action [:disable, :stop]
+  ignore_failure true
+end

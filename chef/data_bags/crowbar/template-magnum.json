@@ -30,7 +30,7 @@
         "database": "magnum"
       },
       "cert": {
-        "cert_manager_type": "local"
+        "cert_manager_type": "x509keypair"
       },
       "ssl": {
         "certfile": "/etc/magnum/ssl/certs/signing_cert.pem",

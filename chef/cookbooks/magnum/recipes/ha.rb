@@ -42,7 +42,7 @@ crowbar_pacemaker_sync_mark "sync-magnum_before_ha"
 # Avoid races when creating pacemaker resources
 crowbar_pacemaker_sync_mark "wait-magnum_ha_resources"
 
-services = ["conductor", "api"]
+services = ["conductor"]
 transaction_objects = []
 
 services.each do |service|
@@ -54,6 +54,15 @@ services.each do |service|
     order_only_existing "( postgresql rabbitmq cl-keystone cl-heat-api )"
   end
   transaction_objects.push(objects)
+end
+
+magnum_api_primitive_name = "magnum-api"
+
+pacemaker_primitive magnum_api_resource do
+  agent node[:magnum][:ha][:api][:agent]
+  action [:stop, :delete]
+  only_if "crm configure show #{magnum_api_primitive_name}"
+  only_if { CrowbarPacemakerHelper.is_cluster_founder?(node) }
 end
 
 pacemaker_transaction "magnum server" do

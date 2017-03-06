@@ -41,3 +41,6 @@ en:
           insecure: 'SSL Certificate is insecure (for instance, self-signed)'
           cert_required: 'Require Client Certificate'
           ca_certs: 'SSL CA Certificates File'
+      validation:
+        barbican:
+          barbican_not_deployed: 'The "barbican-controller" role is not deployed. Please check the Barbican barclamp'
